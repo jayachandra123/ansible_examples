@@ -1,0 +1,38 @@
+# ansible_examples
+ansible_my_examples
+
+================================
+#installing httpd
+---
+- hosts: clients
+  become: yes
+  tasks:
+  - name: installing httpd
+    yum: name=httpd state=latest
+    
+===========================================================
+#starting httpd
+
+---
+- hosts: clients
+  become: yes
+  tasks:
+  - name: installing httpd
+    yum: name=httpd state=latest
+  - name: starting httpd
+    service: name=httpd state=started
+
+=================================
+#multiple packages install
+---
+- hosts: clients
+  become: yes
+  tasks:
+  -  name: installing multiple  packages
+    yum: state=latest name= { { item } }
+    with_items:
+       - git
+       - unzip
+       - httpd
+       - wget
+================================================
